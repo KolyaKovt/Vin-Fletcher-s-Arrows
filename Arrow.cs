@@ -7,34 +7,34 @@ namespace Arrows
     {
         private const float GOLD_PER_SENTIMETER_SHAFT = 0.05f;
 
-        private readonly ArrowHead _head;
-        private readonly float _shaftLength;
-        private readonly ArrowFletching _fletching;
+        public ArrowHead Head { get; }
+        public float ShaftLength { get; }
+        public ArrowFletching Fletching { get; }
 
         public Arrow(ArrowHead head, float shaftLength, ArrowFletching fletching)
         {
-            _head = head;
+            Head = head;
             if (shaftLength < 60)
             {
-                _shaftLength = 60;
+                ShaftLength = 60;
             }
             else if (shaftLength > 100)
             {
-                _shaftLength = 100;
+                ShaftLength = 100;
             }
             else
             {
-                _shaftLength = shaftLength;
+                ShaftLength = shaftLength;
             }
-            _fletching = fletching;
+            Fletching = fletching;
         }
 
         public float GetCost()
         {
             float sum = 0;
-            sum += (int)_head;
-            sum += (int)_fletching;
-            sum += _shaftLength * GOLD_PER_SENTIMETER_SHAFT;
+            sum += (int)Head;
+            sum += (int)Fletching;
+            sum += ShaftLength * GOLD_PER_SENTIMETER_SHAFT;
 
             return sum;
         }
