@@ -5,7 +5,7 @@ namespace Arrows
 {
     public class Arrow
     {
-        private const float GOLD_PER_SENTIMETER_SHAFT = 0.05f;
+        private const float _goldPerSentimeterShaft = 0.05f;
 
         public ArrowHead Head { get; }
         public float ShaftLength { get; }
@@ -14,18 +14,14 @@ namespace Arrows
         public Arrow(ArrowHead head, float shaftLength, ArrowFletching fletching)
         {
             Head = head;
-            if (shaftLength < 60)
+
+            ShaftLength = shaftLength switch
             {
-                ShaftLength = 60;
-            }
-            else if (shaftLength > 100)
-            {
-                ShaftLength = 100;
-            }
-            else
-            {
-                ShaftLength = shaftLength;
-            }
+                < 60 => 60,
+                > 100 => 100,
+                _ => shaftLength
+            };
+
             Fletching = fletching;
         }
 
@@ -34,7 +30,7 @@ namespace Arrows
             float sum = 0;
             sum += (int)Head;
             sum += (int)Fletching;
-            sum += ShaftLength * GOLD_PER_SENTIMETER_SHAFT;
+            sum += ShaftLength * _goldPerSentimeterShaft;
 
             return sum;
         }
